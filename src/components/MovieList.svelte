@@ -57,13 +57,8 @@
 		{/each}
 	</div>
 	<div class="w-full flex items-center justify-center mt-3">
-		<!-- {#await getMoviesFilteredByGenre} -->
-		<!-- promise is pending -->
-		<!-- {:then value} -->
-		<!-- promise was fulfilled -->
 		<button class="px-3 py-2 border rounded-md text-gray" on:click={loadMoreMovies}
 			>Load more...</button
 		>
-		<!-- {/await} -->
 	</div>
 </div>

@@ -20,7 +20,6 @@
 	{:else}
 		<div class="w-52 h-72 bg-slate-900" />
 	{/if}
-	<!-- else content here -->
 	<h4 class="text-xs text-center text-white">{movie.title}</h4>
 	<h4 class="text-xs text-center text-gray ">
 		{genres.slice(0, 3).join(', ')}
