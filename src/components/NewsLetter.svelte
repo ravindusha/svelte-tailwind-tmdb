@@ -10,6 +10,8 @@
 			class="bg-transparent ml-5 pr-5 outline-none placeholder:text-gray"
 		/>
 
-		<button class="bg-pink text-white px-4 py-3 font-semibold">Subscribe Now</button>
+		<button class="bg-pink text-white px-4 py-3 font-semibold hover:opacity-90"
+			>Subscribe Now</button
+		>
 	</div>
 </div>
