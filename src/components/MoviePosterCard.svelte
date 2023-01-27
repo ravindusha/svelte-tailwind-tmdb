@@ -1,14 +1,18 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
+	import { configData } from '../stores/config';
 	import type { Movie } from '../types/Movie';
 	import { generateGenreList } from '../utilities/generateGenreList';
 	import { generatePosterImagePath } from '../utilities/generateImagePaths';
 
 	export let movie: Movie;
+	let genres: string[] = [];
+	let posterImage = '';
 
-	$: posterImage = generatePosterImagePath(movie.poster_path);
-
-	$: genres = generateGenreList(movie.genre_ids);
+	$: if (movie && $configData) {
+		posterImage = generatePosterImagePath(movie.poster_path);
+		genres = generateGenreList(movie.genre_ids);
+	}
 </script>
 
 <div

@@ -1,34 +1,35 @@
 <script lang="ts">
-	import { configData } from '../stores/config';
+	import { browser } from '$app/environment';
 	import { filteredMoviePage, filteredMovies } from '../stores/filteredMovies';
-	import { genreList } from '../stores/genreList';
-	import { TMDB } from '../utilities/axiosConfig';
+	import type { Movie } from '../types/Movie';
 	import MovieCategories from './MovieCategories.svelte';
 	import MoviePosterCard from './MoviePosterCard.svelte';
 
 	let selectedGenres: number[] = [];
 
 	const getMoviesFilteredByGenre = async (page: number) => {
-		try {
-			const movies = await TMDB.get(
-				`/discover/movie?page=${page}${
-					selectedGenres.length ? `&with_genres=${selectedGenres.join(',')}` : ''
-				}`
-			);
-			if (page > 1) {
-				filteredMovies.update((movieData) => [...movieData, ...movies.data.results]);
-			} else {
-				filteredMovies.set(movies.data.results);
+		if (browser) {
+			try {
+				const res = await fetch(
+					`/api/discover/movie?page=${page}${
+						selectedGenres.length ? `&with_genres=${selectedGenres.join(',')}` : ''
+					}`
+				);
+				const movies: Movie[] = await res.json();
+				if (page > 1) {
+					filteredMovies.update((movieData) => {
+						const newMovies = movies.filter((m) => !movieData.map((m) => m.id).includes(m.id));
+						return [...movieData, ...newMovies];
+					});
+				} else {
+					filteredMovies.set(movies);
+				}
+				filteredMoviePage.set(page);
+			} catch (error) {
+				console.error(error);
 			}
-			filteredMoviePage.set(page);
-		} catch (error) {
-			console.error(error);
 		}
 	};
-
-	$: if ($configData && $genreList) {
-		getMoviesFilteredByGenre(1);
-	}
 
 	$: if (selectedGenres) {
 		getMoviesFilteredByGenre(1);
