@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
+	import { afterUpdate, onDestroy, onMount } from 'svelte';
 	import Featured from '../components/Featured.svelte';
 	import Footer from '../components/Footer.svelte';
 	import MovieList from '../components/MovieList.svelte';
@@ -7,8 +7,11 @@
 	import NowPlaying from '../components/NowPlaying.svelte';
 	import { configData } from '../stores/config';
 	import { genreList } from '../stores/genreList';
-	import { popularMovies } from '../stores/popularMovies';
-	import { TMDB } from '../utilities/axiosConfig';
+	import type { PageData } from './$types';
+
+	export let data: PageData;
+
+	const { configuration, genres, popularMovies, nowPlaying } = data;
 
 	let movieIndex = 0;
 
@@ -21,23 +24,15 @@
 		}
 	};
 
-	onMount(async () => {
-		try {
-			const config = await TMDB.get('/configuration', { timeout: 2000 });
-			configData.set(config.data);
-
-			const genres = await TMDB.get('/genre/movie/list');
-			genreList.set(genres.data.genres);
-
-			const res = await TMDB.get('/movie/popular');
-			popularMovies.set(res.data.results);
-		} catch (error) {
-			console.error(error);
-		}
-
+	onMount(() => {
 		interval = setInterval(() => {
 			changeMovieIndex();
 		}, 10000);
+	});
+
+	afterUpdate(() => {
+		configData.set(configuration);
+		genreList.set(genres);
 	});
 
 	const handleSlideChange = (event: CustomEvent) => {
@@ -47,12 +42,14 @@
 	onDestroy(() => clearInterval(interval));
 </script>
 
-<Featured
-	movie={$popularMovies[movieIndex]}
-	currentSlide={movieIndex}
-	on:slideChange={handleSlideChange}
-/>
-<NowPlaying />
-<MovieList />
-<NewsLetter />
-<Footer />
+<div>
+	<Featured
+		movie={popularMovies[movieIndex]}
+		currentSlide={movieIndex}
+		on:slideChange={handleSlideChange}
+	/>
+	<NowPlaying nowPlayingMovies={nowPlaying} />
+	<MovieList />
+	<NewsLetter />
+	<Footer />
+</div>
