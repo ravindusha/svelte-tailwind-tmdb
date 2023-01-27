@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
 	import type { Movie } from '../types/Movie';
 	import { generateGenreList } from '../utilities/generateGenreList';
 	import { generatePosterImagePath } from '../utilities/generateImagePaths';
@@ -11,9 +12,15 @@
 </script>
 
 <div
+	transition:fade
 	class="relative flex flex-col items-center overflow-hidden w-52 gap-1 rounded-md hover:opacity-80 cursor-pointer "
 >
-	<img src={posterImage} alt={movie.title} class="w-52 h-72 object-cover" />
+	{#if movie.poster_path}
+		<img src={posterImage} alt={movie.title} class="w-52 h-72 object-cover" />
+	{:else}
+		<div class="w-52 h-72 bg-slate-900" />
+	{/if}
+	<!-- else content here -->
 	<h4 class="text-xs text-center text-white">{movie.title}</h4>
 	<h4 class="text-xs text-center text-gray ">
 		{genres.slice(0, 3).join(', ')}

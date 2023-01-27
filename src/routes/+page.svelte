@@ -40,10 +40,18 @@
 		}, 10000);
 	});
 
+	const handleSlideChange = (event: CustomEvent) => {
+		movieIndex = event.detail.index;
+	};
+
 	onDestroy(() => clearInterval(interval));
 </script>
 
-<Featured movie={$popularMovies[movieIndex]} currentSlide={movieIndex} />
+<Featured
+	movie={$popularMovies[movieIndex]}
+	currentSlide={movieIndex}
+	on:slideChange={handleSlideChange}
+/>
 <NowPlaying />
 <MovieList />
 <NewsLetter />

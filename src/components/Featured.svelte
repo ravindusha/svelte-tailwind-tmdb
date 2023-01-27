@@ -53,7 +53,7 @@
 					</div>
 				</div>
 				<div class="h-5 row-start-2 col-span-full flex items-center justify-center">
-					<Slider {currentSlide} />
+					<Slider {currentSlide} on:slideChange />
 				</div>
 			</div>
 		{/if}
