@@ -5,7 +5,7 @@ import type { RequestEvent } from './$types';
 export const GET = async ({ params }: RequestEvent) => {
 	try {
 		const movie = await TMDB.get(
-			`/movie/${params.movieId}?append_to_response=credits,videos,similar`,
+			`/movie/${params.movieId}?append_to_response=credits,videos,similar,reviews`,
 			{
 				timeout: 2000
 			}
