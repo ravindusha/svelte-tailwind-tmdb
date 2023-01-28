@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
 	import { configData } from '../stores/config';
 	import type { Movie } from '../types/Movie';
 	import { generateGenreList } from '../utilities/generateGenreList';
@@ -20,6 +21,7 @@
 	<div
 		class=" relative left-0 top-0 w-full h-screen bg-gradient-to-r from-blue-900 to-black-500 -mt-20  bg-cover bg-no-repeat"
 		style={movie && backdropImagePath ? `background-image: url(${backdropImagePath})` : ''}
+		transition:fade
 	>
 		<div class="w-full h-full bg-gradient-to-r from-[rgba(0,0,0,0.7)] to-[rgba(0,0,0,0.5)]" />
 	</div>
