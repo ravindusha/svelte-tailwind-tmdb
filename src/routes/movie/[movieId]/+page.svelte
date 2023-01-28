@@ -3,6 +3,8 @@
 	import MovieDetailsOverview from '../../../components/MovieDetailsOverview.svelte';
 	import MovieTrailer from '../../../components/MovieTrailer.svelte';
 	import SimilarMovies from '../../../components/SimilarMovies.svelte';
+	import { configData } from '../../../stores/config';
+	import { genreList } from '../../../stores/genreList';
 	import type { Video } from '../../../types/Video';
 	import { generatePosterImagePath } from '../../../utilities/generateImagePaths';
 	import type { PageData } from './$types';
@@ -16,12 +18,16 @@
 	let officialTrailer: Video | undefined;
 
 	$: if (movie) {
-		posterImagePath = generatePosterImagePath(movie.poster_path);
-		genres = movie.genres.map((g) => g.name);
-
 		officialTrailer = movie.videos?.results.find(
 			(v) => v.type === 'Trailer' && v.site === 'YouTube'
 		);
+	}
+
+	$: if ($configData && movie) {
+		posterImagePath = generatePosterImagePath(movie.poster_path);
+	}
+	$: if ($genreList && movie) {
+		genres = movie.genres.map((g) => g.name);
 	}
 </script>
 
