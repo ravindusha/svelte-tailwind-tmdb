@@ -18,3 +18,11 @@ export const generatePosterImagePath = (posterPath: string) => {
 		return '';
 	}
 };
+export const generateAvatarImagePath = (avatarPath: string) => {
+	const config = get(configData);
+	if (config) {
+		return config.images.base_url + config.images.profile_sizes[1] + avatarPath;
+	} else {
+		return '';
+	}
+};

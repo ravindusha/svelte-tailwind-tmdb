@@ -2,6 +2,7 @@
 	import { fade } from 'svelte/transition';
 	import MovieDetailsOverview from '../../../components/MovieDetailsOverview.svelte';
 	import MovieTrailer from '../../../components/MovieTrailer.svelte';
+	import Reviews from '../../../components/Reviews.svelte';
 	import SimilarMovies from '../../../components/SimilarMovies.svelte';
 	import { configData } from '../../../stores/config';
 	import { genreList } from '../../../stores/genreList';
@@ -37,8 +38,11 @@
 	{#if officialTrailer}
 		<MovieTrailer videoKey={officialTrailer.key} />
 	{/if}
-	{#if movie?.similar?.results}
+	{#if movie?.similar?.results.length}
 		<SimilarMovies similarMovies={movie?.similar?.results} />
+	{/if}
+	{#if movie.reviews?.results.length}
+		<Reviews reviews={movie.reviews.results} />
 	{/if}
 </div>
 

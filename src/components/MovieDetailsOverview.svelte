@@ -53,5 +53,5 @@
 </div>
 <div class="py-5 mt-5 flex flex-col gap-5">
 	<h2 class="text-xl">Description</h2>
-	<p class="text-md text-gray">{movie.overview}</p>
+	<p class="text-md text-gray select-none">{movie.overview}</p>
 </div>
