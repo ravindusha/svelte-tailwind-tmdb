@@ -5,8 +5,7 @@ Need to add "API Read Access Token (v4 auth)" in `.env` file to authenticate API
 ### TODO
 
 1. Add mobile views
-2. Create movie info page
-3. Add animations
+2. Add animations
 
 ## create-svelte
 

@@ -2,6 +2,7 @@
 
 import type { Credits } from './Credits';
 import type { Movie } from './Movie';
+import type { Review } from './Review';
 import type { Video } from './Video';
 
 export interface MovieDetails {
@@ -23,6 +24,9 @@ export interface MovieDetails {
 	production_countries: ProductionCountry[];
 	release_date: Date;
 	revenue: number;
+	reviews?: {
+		results: Review[];
+	};
 	runtime: number;
 	similar?: {
 		results: Movie[];

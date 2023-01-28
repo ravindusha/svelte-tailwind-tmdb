@@ -41,13 +41,14 @@
 					<div class="flex gap-3 items-center mb-10">
 						<span>Rating {movie.vote_average}</span>
 						<span>Release Date {movie.release_date}</span>
-						<span class="border px-1">16+</span>
 					</div>
 					<div class="flex gap-5">
-						<button class="px-5 py-3 rounded-full bg-white text-pink font-bold text-sm w-36"
+						<button
+							class="px-5 py-3 rounded-full bg-white text-pink font-bold text-sm w-36 hover:opacity-80"
 							>Watch now</button
 						>
-						<button class="px-5 py-3 rounded-full bg-pink text-white font-bold text-sm w-36"
+						<button
+							class="px-5 py-3 rounded-full bg-pink text-white font-bold text-sm w-36 hover:opacity-80"
 							>Add to list</button
 						>
 					</div>
